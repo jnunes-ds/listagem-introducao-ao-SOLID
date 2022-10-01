@@ -2,7 +2,7 @@ import { v4 as uuidV4, V4Options } from "uuid";
 
 class User {
   constructor(
-    public id: V4Options,
+    public id: string,
     public name: string,
     public admin: boolean,
     public email: string,
