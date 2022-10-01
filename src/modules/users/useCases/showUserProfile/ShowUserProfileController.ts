@@ -10,6 +10,9 @@ class ShowUserProfileController {
 
     const user = this.showUserProfileUseCase.execute({ user_id });
 
+    if (!user.id) {
+      return response.status(404);
+    }
     return response.status(200).send(user);
   }
 }
