@@ -10,14 +10,17 @@ class ListAllUsersController {
   constructor(private listAllUsersUseCase: ListAllUsersUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    const { user_id } = (request.headers as unknown) as IHeaders;
-    const users = this.listAllUsersUseCase.execute({ user_id });
+    try {
+      const { user_id } = (request.headers as unknown) as IHeaders;
+      const users = this.listAllUsersUseCase.execute({ user_id });
 
-    if (!users) {
-      return response.status(404);
+      if (!users.length) {
+        return response.status(404);
+      }
+      return response.status(200).send(users);
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
     }
-
-    return response.json(200).send(users);
   }
 }
 

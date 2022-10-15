@@ -1,17 +1,17 @@
-import { validate } from "uuid";
+import { validate, v4 as uuidV4 } from "uuid";
 
 import { User } from "../../../modules/users/model/User";
 
 describe("User model", () => {
   it("should be able to create an user with all props", () => {
-    const user = new User();
-
-    Object.assign(user, {
-      name: "Atlas",
-      email: "atlas@fromspace.com",
-      created_at: new Date(),
-      updated_at: new Date(),
-    });
+    const user = new User(
+      uuidV4(),
+      "Atlas",
+      false,
+      "atlas@fromspace.com",
+      new Date(),
+      new Date()
+    );
 
     expect(user).toMatchObject({
       name: "Atlas",
