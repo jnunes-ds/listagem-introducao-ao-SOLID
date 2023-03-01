@@ -1,0 +1,11 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SOLID Intro Documentation",
+    "description": "this is an API to know more about SOLID principles",
+    "version": "1.0.0",
+    "contact": {
+      "email": "denisonprobable13@gmail.com"
+    }
+  }
+}
