@@ -44,6 +44,34 @@
             "description": "User already exists"
           }
         }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "list all users",
+        "description": "list all users",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
