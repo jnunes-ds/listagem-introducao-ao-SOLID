@@ -236,6 +236,78 @@
           }
         }
       }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Makes a user admin",
+        "description": "Makes a user admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "dfasfe158-1781hjtdfgdg-gfd818-hg1556"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jhonn Dee"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "jhonn@email.com"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2023-03-03T141:17:50.992Z"
+                    },
+                    "updated_at": {
+                      "type": "date",
+                      "example": "2023-03-03T141:17:50.992Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
