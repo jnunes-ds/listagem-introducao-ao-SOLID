@@ -1,0 +1,313 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SOLID Intro Documentation",
+    "description": "this is an API to know more about SOLID principles",
+    "version": "1.0.0",
+    "contact": {
+      "email": "denisonprobable13@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "create a user",
+        "description": "create a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Jhonn Dee",
+                  "email": "jhonn@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "dfasfe158-1781hjtdfgdg-gfd818-hg1556"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jhonn Dee"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "jhonn@email.com"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2023-03-03T141:17:50.992Z"
+                    },
+                    "updated_at": {
+                      "type": "date",
+                      "example": "2023-03-03T141:17:50.992Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "User already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User already exists!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "list all users",
+        "description": "list all users",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "admin": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "dfasfe158-1781hjtdfgdg-gfd818-hg1556"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Jhonn Dee"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "jhonn@email.com"
+                      },
+                      "created_at": {
+                        "type": "date",
+                        "example": "2023-03-03T141:17:50.992Z"
+                      },
+                      "updated_at": {
+                        "type": "date",
+                        "example": "2023-03-03T141:17:50.992Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User does not have permission or user not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "You need to be an administrator to list all users."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get user by id",
+        "description": "Return a specific user via its id",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "dfasfe158-1781hjtdfgdg-gfd818-hg1556"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jhonn Dee"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "jhonn@email.com"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2023-03-03T141:17:50.992Z"
+                    },
+                    "updated_at": {
+                      "type": "date",
+                      "example": "2023-03-03T141:17:50.992Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Makes a user admin",
+        "description": "Makes a user admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "dfasfe158-1781hjtdfgdg-gfd818-hg1556"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jhonn Dee"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "jhonn@email.com"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2023-03-03T141:17:50.992Z"
+                    },
+                    "updated_at": {
+                      "type": "date",
+                      "example": "2023-03-03T141:17:50.992Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
